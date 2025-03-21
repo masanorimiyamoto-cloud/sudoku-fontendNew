@@ -22,3 +22,5 @@ const BoardGrid = ({ board, problemCells, errorCells, selectedCell, onCellClick 
     </div>
   );
 };
+// デフォルトエクスポートを追加
+export default BoardGrid;
