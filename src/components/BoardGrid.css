@@ -6,7 +6,9 @@
     gap: 1px; /* セル間のスペースを調整 */
     width: max-content; /* グリッドの幅を内容に合わせる */
     margin: 0 auto; /* 中央揃え */
+    border: 2px solid #000; /* 外側の境界線を太くする */
   }
+  
   .cell {
     width: 40px; /* セルのサイズ */
     height: 40px;
@@ -15,5 +17,36 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #fff; /* セルの背景色 */
   }
   
+  /* 3x3ブロックの右側の境界線 */
+  .cell.block-border-right {
+    border-right: 2px solid #000;
+  }
+  
+  /* 3x3ブロックの下側の境界線 */
+  .cell.block-border-bottom {
+    border-bottom: 2px solid #000;
+  }
+  
+  /* 問題セルのスタイル */
+  .cell.problem {
+    background-color: #f0f0f0; /* 問題セルの背景色 */
+    font-weight: bold; /* 問題セルの文字を太くする */
+  }
+  
+  /* エラーセルのスタイル */
+  .cell.error {
+    background-color: #ffcccc; /* エラーセルの背景色 */
+  }
+  /* ホバーエフェクト */
+    .cell:hover {
+        background-color: #e0e0e0;
+        cursor: pointer;
+    }
+    
+    /* アニメーション */
+    .cell {
+        transition: background-color 0.2s ease;
+    }
