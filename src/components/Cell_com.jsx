@@ -1,4 +1,4 @@
-// src/components/Cell.jsx
+// src/components/Cell_com.jsx
 import React from "react";
 
 export default function Cell({
@@ -22,7 +22,14 @@ export default function Cell({
       <div
         className={className}
         onClick={onClick}
-        style={{ width: "50px", height: "50px", border: "1px solid black" }}
+        style={{
+          width: "40px",
+          height: "40px",
+          border: "1px solid black",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
         {value || ""}
       </div>

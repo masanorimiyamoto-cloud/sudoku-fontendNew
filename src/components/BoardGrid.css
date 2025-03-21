@@ -1,0 +1,19 @@
+/* src/components/BoardGrid.css */
+.board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    gap: 1px; /* セル間のスペースを調整 */
+    width: max-content; /* グリッドの幅を内容に合わせる */
+    margin: 0 auto; /* 中央揃え */
+  }
+  .cell {
+    width: 40px; /* セルのサイズ */
+    height: 40px;
+    text-align: center;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
