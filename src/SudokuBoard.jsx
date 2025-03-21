@@ -24,6 +24,11 @@ function SudokuBoard() {
     const newBoard = board.map((rArr) => rArr.slice());
     newBoard[row][col] = val;
     setBoard(newBoard);
+  
+    // 誤りが修正された場合、errorCellsからそのセルを削除
+    setErrorCells((prevErrorCells) =>
+      prevErrorCells.filter(([r, c]) => !(r === row && c === col))
+    );
   };
 
   // セルをタップ（問題セルの場合は選択しない）
@@ -109,7 +114,7 @@ function SudokuBoard() {
             }
           }
         }
-        setErrorCells(errors);
+        setErrorCells(errors); // 誤りがあるセルの座標を更新
         alert(errors.length === 0 ? "入力された値はすべて正しいです！" : "いくつかのセルに誤りがあります！");
       } else {
         alert("正解が取得できませんでした: " + response.data.message);
