@@ -10,8 +10,8 @@
 }
 
 .cell {
-    width: 40px; /* セルのサイズ */
-    height: 40px;
+    width: 48px; /* セルのサイズ */
+    height: 48px;
     text-align: center;
     border: 1px solid #ccc; /* セルの境界線を薄い灰色に */
     display: flex;
