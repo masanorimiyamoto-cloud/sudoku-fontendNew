@@ -163,3 +163,5 @@ const handleSetOrUnsetProblem = () => {
     </div>
   );
 }
+// ファイルの最後に以下が記述されているか確認
+export default SudokuBoard;
