@@ -16,7 +16,8 @@ function SudokuBoard() {
   const [selectedCell, setSelectedCell] = useState(null); // タップされたセル
   const [problemCells, setProblemCells] = useState([]); // 問題としてセットされたセルの座標
   const [errorCells, setErrorCells] = useState([]); // ユーザー入力が誤っているセルの座標
-
+  // ↓ 新たに追加する state です。
+  const [isChecking, setIsChecking] = useState(false);
   // セルが変更されたとき（問題セルは変更不可）
   const handleChangeCell = (row, col, value) => {
     if (problemCells.some(([r, c]) => r === row && c === col)) return; // 問題セルは変更不可
