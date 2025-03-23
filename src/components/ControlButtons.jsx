@@ -1,4 +1,5 @@
 import React from "react";
+import './ControlButtons.css'; // CSSファイルをインポート
 
 export default function ControlButtons({
   onSetOrUnsetProblem,
@@ -7,15 +8,23 @@ export default function ControlButtons({
   onClearSolution,
   onReset,
   disableCheck = false,
-  isProblemSet = false, // 問題がセットされているかどうかを受け取る
+  isProblemSet = false,
 }) {
   return (
-    <div style={{ marginTop: "20px" }}>
-      <button type="button" onClick={onSetOrUnsetProblem} style={buttonStyle}>
+    <div className="button-container">
+      <button
+        type="button"
+        onClick={onSetOrUnsetProblem}
+        className="button set-problem-button"
+      >
         {isProblemSet ? "問題のセットを解除" : "問題をセット"}
       </button>
 
-      <button type="button" onClick={onSubmit} style={buttonStyle}>
+      <button
+        type="button"
+        onClick={onSubmit}
+        className="button submit-button"
+      >
         解答をリクエスト
       </button>
 
@@ -23,32 +32,26 @@ export default function ControlButtons({
         type="button"
         onClick={onCheckPartial}
         disabled={disableCheck}
-        style={{
-          ...buttonStyle,
-          cursor: disableCheck ? "not-allowed" : "pointer",
-          opacity: disableCheck ? 0.6 : 1,
-        }}
+        className="button check-partial-button"
       >
         {disableCheck ? "チェック中…" : "部分チェック"}
       </button>
 
-      <button type="button" onClick={onClearSolution} style={buttonStyle}>
+      <button
+        type="button"
+        onClick={onClearSolution}
+        className="button clear-solution-button"
+      >
         解答を消す
       </button>
 
-      <button type="button" onClick={onReset} style={buttonStyle}>
+      <button
+        type="button"
+        onClick={onReset}
+        className="button reset-button"
+      >
         すべてリセット
       </button>
     </div>
   );
 }
-
-const buttonStyle = {
-  margin: "10px",
-  padding: "10px 20px",
-  fontSize: "16px",
-  backgroundColor: "#6A5ACD",
-  color: "white",
-  border: "none",
-  borderRadius: "5px",
-};

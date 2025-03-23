@@ -1,52 +1,77 @@
-/* src/components/BoardGrid.css */
-.board {
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    grid-template-rows: repeat(9, 1fr);
-    gap: 1px; /* セル間のスペースを調整 */
-    width: max-content; /* グリッドの幅を内容に合わせる */
-    margin: 0 auto; /* 中央揃え */
-    border: 2px solid #000; /* 外側の境界線を太くする */
-  }
-  
-  .cell {
-    width: 40px; /* セルのサイズ */
-    height: 40px;
-    text-align: center;
-    border: 1px solid #000;
+/* src/components/ControlButtons.css */
+.button-container {
+    margin-top: 20px;
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
-    background-color: #fff; /* セルの背景色 */
-  }
-  
-  /* 3x3ブロックの右側の境界線 */
-  .cell.block-border-right {
-    border-right: 2px solid #000;
-  }
-  
-  /* 3x3ブロックの下側の境界線 */
-  .cell.block-border-bottom {
-    border-bottom: 2px solid #000;
-  }
-  
-  /* 問題セルのスタイル */
-  .cell.problem {
-    background-color: #f0f0f0; /* 問題セルの背景色 */
-    font-weight: bold; /* 問題セルの文字を太くする */
-  }
-  
-  /* エラーセルのスタイル */
-  .cell.error {
-    background-color: #ffcccc; /* エラーセルの背景色 */
-  }
-  /* ホバーエフェクト */
-    .cell:hover {
-        background-color: #e0e0e0;
-        cursor: pointer;
-    }
-    
-    /* アニメーション */
-    .cell {
-        transition: background-color 0.2s ease;
-    }
+    gap: 10px; /* ボタン間のスペースを調整 */
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.button:hover {
+    transform: scale(1.05); /* ホバー時に少し拡大 */
+}
+
+.button:active {
+    transform: scale(0.95); /* クリック時に少し縮小 */
+}
+
+/* 問題をセット/解除ボタン */
+.set-problem-button {
+    background-color: #007bff; /* 青色 */
+}
+
+.set-problem-button:hover {
+    background-color: #0056b3; /* 濃い青色 */
+}
+
+/* 解答をリクエストボタン */
+.submit-button {
+    background-color: #28a745; /* 緑色 */
+}
+
+.submit-button:hover {
+    background-color: #218838; /* 濃い緑色 */
+}
+
+/* 部分チェックボタン */
+.check-partial-button {
+    background-color: #6f42c1; /* 紫色 */
+}
+
+.check-partial-button:hover {
+    background-color: #563d7c; /* 濃い紫色 */
+}
+
+.check-partial-button:disabled {
+    background-color: #b0a8c1; /* 無効時の色 */
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* 解答を消すボタン */
+.clear-solution-button {
+    background-color: #ffc107; /* オレンジ色 */
+}
+
+.clear-solution-button:hover {
+    background-color: #e0a800; /* 濃いオレンジ色 */
+}
+
+/* すべてリセットボタン */
+.reset-button {
+    background-color: #dc3545; /* 赤色 */
+}
+
+.reset-button:hover {
+    background-color: #c82333; /* 濃い赤色 */
+}
