@@ -1,5 +1,5 @@
 import React from "react";
-import './ControlButtons.css'; // CSSファイルをインポート
+import './BoardGrid.css'; // CSSファイルをインポート
 
 export default function ControlButtons({
   onSetOrUnsetProblem,
