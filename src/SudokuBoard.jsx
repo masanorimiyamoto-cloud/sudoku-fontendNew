@@ -40,26 +40,28 @@ function SudokuBoard() {
   };
 
   // 問題をセットまたは解除
-  const handleSetOrUnsetProblem = () => {
-    if (isProblemSet) {
-      // 問題のセットを解除
-      setOriginalBoard(null);
-      setProblemCells([]);
-      setIsProblemSet(false);
-      alert("問題のセットを解除しました！");
-    } else {
-      // 問題をセット
-      setOriginalBoard(board.map((row) => [...row]));
-      const fixedCells = board
-        .flatMap((row, r) =>
-          row.map((cell, c) => (cell !== 0 ? [r, c] : null))
-        .filter(Boolean);
-      setProblemCells(fixedCells);
-      setErrorCells([]);
-      setIsProblemSet(true);
-      alert("問題がセットされました！");
-    }
-  };
+const handleSetOrUnsetProblem = () => {
+  if (isProblemSet) {
+    // 問題のセットを解除
+    setOriginalBoard(null);
+    setProblemCells([]);
+    setIsProblemSet(false);
+    alert("問題のセットを解除しました！");
+  } else {
+    // 問題をセット
+    setOriginalBoard(board.map((row) => [...row]));
+    const fixedCells = board
+      .flatMap((row, r) =>
+        row.map((cell, c) => (cell !== 0 ? [r, c] : null))
+      )
+      .filter(Boolean);
+    setProblemCells(fixedCells);
+    setErrorCells([]);
+    setIsProblemSet(true);
+    alert("問題がセットされました！");
+  }
+};
+
 
   // 解答リクエスト
   const handleSubmit = async () => {
