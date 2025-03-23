@@ -1,5 +1,5 @@
 import React from "react";
-import './BoardGrid.css';
+import './BoardGrid.css'; // BoardGrid.cssをインポート
 
 const BoardGrid = ({ board, problemCells, errorCells, selectedCell, onCellClick }) => {
   return (
