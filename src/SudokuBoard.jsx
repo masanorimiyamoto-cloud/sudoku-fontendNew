@@ -153,6 +153,7 @@ function SudokuBoard() {
         onCheckPartial={handleCheckPartialSolution}
         onClearSolution={handleClearSolution}
         onReset={handleResetBoard}
+        disableCheck={isChecking} // isCheckingステートを渡す
       />
     </div>
   );
