@@ -24,7 +24,7 @@ function SudokuBoard() {
     const newBoard = board.map((rArr) => rArr.slice());
     newBoard[row][col] = val;
     setBoard(newBoard);
-
+  
     // 誤りが修正された場合、errorCellsからそのセルを削除
     setErrorCells((prevErrorCells) =>
       prevErrorCells.filter(([r, c]) => !(r === row && c === col))
@@ -46,29 +46,32 @@ function SudokuBoard() {
   };
 
   // 問題をセットまたは解除
-  const handleSetOrUnsetProblem = () => {
-    console.log("isProblemSet before:", isProblemSet); // デバッグ用ログ
-    if (isProblemSet) {
-      // 問題のセットを解除
-      setOriginalBoard(null);
-      setProblemCells([]);
-      setIsProblemSet(false);
-      console.log("Problem unset. isProblemSet after:", false); // デバッグ用ログ
-      alert("問題のセットを解除しました！");
-    } else {
-      // 問題をセット
-      setOriginalBoard(board.map((row) => [...row]));
-      const fixedCells = board
-        .flatMap((row, r) =>
-          row.map((cell, c) => (cell !== 0 ? [r, c] : null))
-        .filter(Boolean);
-      setProblemCells(fixedCells);
-      setErrorCells([]);
-      setIsProblemSet(true);
-      console.log("Problem set. isProblemSet after:", true); // デバッグ用ログ
-      alert("問題がセットされました！");
-    }
-  };
+  // 問題をセットまたは解除
+const handleSetOrUnsetProblem = () => {
+  console.log("isProblemSet before:", isProblemSet); // デバッグ用ログ
+  if (isProblemSet) {
+    // 問題のセットを解除
+    setOriginalBoard(null);
+    setProblemCells([]);
+    setIsProblemSet(false);
+    console.log("Problem unset. isProblemSet after:", false); // デバッグ用ログ
+    alert("問題のセットを解除しました！");
+  } else {
+    // 問題をセット
+    setOriginalBoard(board.map((row) => [...row]));
+    const fixedCells = board
+      .flatMap((row, r) =>
+        row.map((cell, c) => (cell !== 0 ? [r, c] : null))
+      )
+      .filter(Boolean);
+    setProblemCells(fixedCells);
+    setErrorCells([]);
+    setIsProblemSet(true);
+    console.log("Problem set. isProblemSet after:", true); // デバッグ用ログ
+    alert("問題がセットされました！");
+  }
+};
+
 
   // 解答リクエスト
   const handleSubmit = async () => {
