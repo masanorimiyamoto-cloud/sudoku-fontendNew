@@ -1,17 +1,18 @@
 import React from "react";
 
 export default function ControlButtons({
-  onSetProblem,
+  onSetOrUnsetProblem,
   onSubmit,
   onCheckPartial,
   onClearSolution,
   onReset,
-  disableCheck = false,      // 新規プロップ
+  disableCheck = false,
+  isProblemSet = false, // 問題がセットされているかどうかを受け取る
 }) {
   return (
     <div style={{ marginTop: "20px" }}>
-      <button type="button" onClick={onSetProblem} style={buttonStyle}>
-        問題をセット
+      <button type="button" onClick={onSetOrUnsetProblem} style={buttonStyle}>
+        {isProblemSet ? "問題のセットを解除" : "問題をセット"}
       </button>
 
       <button type="button" onClick={onSubmit} style={buttonStyle}>

@@ -46,17 +46,26 @@ function SudokuBoard() {
     }
   };
 
-  // 問題をセット
-  const handleSetProblem = () => {
-    setOriginalBoard(board.map((row) => [...row]));
-    const fixedCells = board
-      .flatMap((row, r) =>
-        row.map((cell, c) => (cell !== 0 ? [r, c] : null))
-      )
-      .filter(Boolean);
-    setProblemCells(fixedCells);
-    setErrorCells([]);
-    alert("問題がセットされました！");
+  // 問題をセットまたは解除
+  const handleSetOrUnsetProblem = () => {
+    if (isProblemSet) {
+      // 問題のセットを解除
+      setOriginalBoard(null);
+      setProblemCells([]);
+      setIsProblemSet(false);
+      alert("問題のセットを解除しました！");
+    } else {
+      // 問題をセット
+      setOriginalBoard(board.map((row) => [...row]));
+      const fixedCells = board
+        .flatMap((row, r) =>
+          row.map((cell, c) => (cell !== 0 ? [r, c] : null))
+        .filter(Boolean);
+      setProblemCells(fixedCells);
+      setErrorCells([]);
+      setIsProblemSet(true);
+      alert("問題がセットされました！");
+    }
   };
 
   // 解答リクエスト
@@ -154,7 +163,9 @@ function SudokuBoard() {
         onClearSolution={handleClearSolution}
         onReset={handleResetBoard}
         disableCheck={isChecking} // isCheckingステートを渡す
+        isProblemSet={isProblemSet} // 問題がセットされているかどうかを渡す
       />
+      {isChecking && <p>🔄 チェック中…しばらくお待ちください。</p>}
     </div>
   );
 }
