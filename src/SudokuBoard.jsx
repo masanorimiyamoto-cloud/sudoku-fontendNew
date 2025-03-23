@@ -1,11 +1,3 @@
-// src/components/SudokuBoard.jsx
-import React, { useState } from "react";
-import axios from "axios";
-import BoardGrid from "./components/BoardGrid";
-import ControlButtons from "./components/ControlButtons";
-import NumberPad from "./components/NumberPad";
-
-
 function SudokuBoard() {
   const initialBoard = Array(9)
     .fill(null)
@@ -16,8 +8,9 @@ function SudokuBoard() {
   const [selectedCell, setSelectedCell] = useState(null); // タップされたセル
   const [problemCells, setProblemCells] = useState([]); // 問題としてセットされたセルの座標
   const [errorCells, setErrorCells] = useState([]); // ユーザー入力が誤っているセルの座標
-  // ↓ 新たに追加する state です。
-  const [isChecking, setIsChecking] = useState(false);
+  const [isChecking, setIsChecking] = useState(false); // チェック中の状態
+  const [isProblemSet, setIsProblemSet] = useState(false); // 問題がセットされているかどうか
+
   // セルが変更されたとき（問題セルは変更不可）
   const handleChangeCell = (row, col, value) => {
     if (problemCells.some(([r, c]) => r === row && c === col)) return; // 問題セルは変更不可
@@ -25,7 +18,7 @@ function SudokuBoard() {
     const newBoard = board.map((rArr) => rArr.slice());
     newBoard[row][col] = val;
     setBoard(newBoard);
-  
+
     // 誤りが修正された場合、errorCellsからそのセルを削除
     setErrorCells((prevErrorCells) =>
       prevErrorCells.filter(([r, c]) => !(r === row && c === col))
@@ -102,6 +95,7 @@ function SudokuBoard() {
     setOriginalBoard(null);
     setProblemCells([]);
     setErrorCells([]);
+    setIsProblemSet(false); // 問題のセットも解除
   };
 
   // 部分チェック機能
@@ -110,17 +104,17 @@ function SudokuBoard() {
       alert("問題をセットしてください！");
       return;
     }
-  
+
     setIsChecking(true);
     try {
       const response = await axios.post("https://numplay.onrender.com/solve", {
         board: originalBoard,
       });
-  
+
       if (response.data.status === "ok") {
         const solution = response.data.solution;
         const errors = [];
-  
+
         for (let i = 0; i < 9; i++) {
           for (let j = 0; j < 9; j++) {
             if (board[i][j] !== 0 && board[i][j] !== solution[i][j]) {
@@ -128,7 +122,7 @@ function SudokuBoard() {
             }
           }
         }
-  
+
         setErrorCells(errors);
         alert(errors.length === 0
           ? "✅ 入力された値はすべて正しいです！"
@@ -143,7 +137,6 @@ function SudokuBoard() {
       setIsChecking(false);
     }
   };
-  
 
   return (
     <div style={{ textAlign: "center" }}>
@@ -157,17 +150,14 @@ function SudokuBoard() {
       />
       {selectedCell && <NumberPad onNumberClick={handleNumberClick} />}
       <ControlButtons
-        onSetProblem={handleSetProblem}
+        onSetOrUnsetProblem={handleSetOrUnsetProblem}
         onSubmit={handleSubmit}
         onCheckPartial={handleCheckPartialSolution}
         onClearSolution={handleClearSolution}
         onReset={handleResetBoard}
-        disableCheck={isChecking} // isCheckingステートを渡す
+        disableCheck={isChecking}
         isProblemSet={isProblemSet} // 問題がセットされているかどうかを渡す
       />
-      {isChecking && <p>🔄 チェック中…しばらくお待ちください。</p>}
     </div>
   );
 }
-
-export default SudokuBoard;
