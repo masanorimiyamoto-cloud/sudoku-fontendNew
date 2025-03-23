@@ -100,13 +100,17 @@ function SudokuBoard() {
       alert("問題をセットしてください！");
       return;
     }
+  
+    setIsChecking(true);
     try {
       const response = await axios.post("https://numplay.onrender.com/solve", {
         board: originalBoard,
       });
+  
       if (response.data.status === "ok") {
         const solution = response.data.solution;
-        let errors = [];
+        const errors = [];
+  
         for (let i = 0; i < 9; i++) {
           for (let j = 0; j < 9; j++) {
             if (board[i][j] !== 0 && board[i][j] !== solution[i][j]) {
@@ -114,15 +118,22 @@ function SudokuBoard() {
             }
           }
         }
-        setErrorCells(errors); // 誤りがあるセルの座標を更新
-        alert(errors.length === 0 ? "入力された値はすべて正しいです！" : "いくつかのセルに誤りがあります！");
+  
+        setErrorCells(errors);
+        alert(errors.length === 0
+          ? "✅ 入力された値はすべて正しいです！"
+          : `❌ ${errors.length}箇所の誤りがあります！`
+        );
       } else {
         alert("正解が取得できませんでした: " + response.data.message);
       }
     } catch (error) {
       alert("サーバーへのリクエストでエラーが発生しました。");
+    } finally {
+      setIsChecking(false);
     }
   };
+  
 
   return (
     <div style={{ textAlign: "center" }}>
