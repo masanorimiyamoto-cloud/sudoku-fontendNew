@@ -1,8 +1,8 @@
 import React, { useState } from "react"; // useStateをインポート
 import axios from "axios"; // axiosをインポート
-import BoardGrid from "./BoardGrid"; // BoardGridをインポート
-import ControlButtons from "./ControlButtons"; // ControlButtonsをインポート
-import NumberPad from "./NumberPad"; // NumberPadをインポート
+import BoardGrid from "./components/BoardGrid"; // BoardGridをインポート
+import ControlButtons from "./components/ControlButtons"; // ControlButtonsをインポート
+import NumberPad from "./components/NumberPad"; // NumberPadをインポート
 
 function SudokuBoard() {
   const initialBoard = Array(9)
