@@ -1,7 +1,17 @@
 import React from "react";
-import './ControlButtons.css'; // ControlButtons.cssをインポート
+import "./ControlButtons.css";
 
-export default function ControlButtons({
+interface ControlButtonsProps {
+  onSetOrUnsetProblem: React.MouseEventHandler<HTMLButtonElement>;
+  onSubmit: React.MouseEventHandler<HTMLButtonElement>;
+  onCheckPartial: React.MouseEventHandler<HTMLButtonElement>;
+  onClearSolution: React.MouseEventHandler<HTMLButtonElement>;
+  onReset: React.MouseEventHandler<HTMLButtonElement>;
+  disableCheck?: boolean;
+  isProblemSet?: boolean;
+}
+
+const ControlButtons: React.FC<ControlButtonsProps> = ({
   onSetOrUnsetProblem,
   onSubmit,
   onCheckPartial,
@@ -9,7 +19,7 @@ export default function ControlButtons({
   onReset,
   disableCheck = false,
   isProblemSet = false,
-}) {
+}) => {
   return (
     <div className="button-container">
       <button
@@ -54,4 +64,6 @@ export default function ControlButtons({
       </button>
     </div>
   );
-}
+};
+
+export default ControlButtons;

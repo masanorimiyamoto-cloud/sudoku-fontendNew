@@ -1,7 +1,10 @@
-// src/components/NumberPad.jsx
 import React from "react";
 
-export default function NumberPad({ onNumberClick }) {
+interface NumberPadProps {
+  onNumberClick: (num: number) => void;
+}
+
+const NumberPad: React.FC<NumberPadProps> = ({ onNumberClick }) => {
   return (
     <div style={{ marginTop: "10px" }}>
       <p>数字を選択:</p>
@@ -49,4 +52,6 @@ export default function NumberPad({ onNumberClick }) {
       </div>
     </div>
   );
-}
+};
+
+export default NumberPad;

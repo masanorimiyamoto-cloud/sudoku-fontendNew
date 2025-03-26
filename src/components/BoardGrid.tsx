@@ -1,7 +1,22 @@
+// src/components/BoardGrid.tsx
 import React from "react";
-import './BoardGrid.css'; // BoardGrid.cssをインポート
+import "./BoardGrid.css";
 
-const BoardGrid = ({ board, problemCells, errorCells, selectedCell, onCellClick }) => {
+interface BoardGridProps {
+  board: number[][]; // 各セルの値は数値（0の場合は空文字で表示）
+  problemCells: Array<[number, number]>;
+  errorCells: Array<[number, number]>;
+  selectedCell?: [number, number] | null;
+  onCellClick: (rowIndex: number, colIndex: number) => void;
+}
+
+const BoardGrid: React.FC<BoardGridProps> = ({
+  board,
+  problemCells,
+  errorCells,
+  selectedCell,
+  onCellClick,
+}) => {
   return (
     <div className="board">
       {board.map((row, rowIndex) =>
@@ -13,8 +28,8 @@ const BoardGrid = ({ board, problemCells, errorCells, selectedCell, onCellClick 
           return (
             <div
               key={`${rowIndex}-${colIndex}`}
-              className={`cell 
-                ${problemCells.some(([r, c]) => r === rowIndex && c === colIndex) ? "problem" : ""} 
+              className={`cell
+                ${problemCells.some(([r, c]) => r === rowIndex && c === colIndex) ? "problem" : ""}
                 ${errorCells.some(([r, c]) => r === rowIndex && c === colIndex) ? "error" : ""}
                 ${isBlockBorderRight ? "block-border-right" : ""}
                 ${isBlockBorderBottom ? "block-border-bottom" : ""}
