@@ -2,13 +2,21 @@
 import React from "react";
 import "./BoardGrid.css";
 
+// BoardGrid.tsx のインターフェースを以下に変更
+
+interface CellPosition {
+  row: number;
+  col: number;
+}
+
 interface BoardGridProps {
-  board: number[][]; // 各セルの値は数値（0の場合は空文字で表示）
-  problemCells: Array<[number, number]>;
-  errorCells: Array<[number, number]>;
-  selectedCell?: [number, number] | null;
+  board: number[][];
+  problemCells: CellPosition[];
+  errorCells: CellPosition[];
+  selectedCell?: CellPosition | null;
   onCellClick: (rowIndex: number, colIndex: number) => void;
 }
+
 
 const BoardGrid: React.FC<BoardGridProps> = ({
   board,
@@ -27,15 +35,17 @@ const BoardGrid: React.FC<BoardGridProps> = ({
 
           return (
             <div
-              key={`${rowIndex}-${colIndex}`}
-              className={`cell
-                ${problemCells.some(([r, c]) => r === rowIndex && c === colIndex) ? "problem" : ""}
-                ${errorCells.some(([r, c]) => r === rowIndex && c === colIndex) ? "error" : ""}
-                ${isBlockBorderRight ? "block-border-right" : ""}
-                ${isBlockBorderBottom ? "block-border-bottom" : ""}
-              `}
-              onClick={() => onCellClick(rowIndex, colIndex)}
-            >
+            key={`${rowIndex}-${colIndex}`}
+            className={`cell
+              ${problemCells.some((cell) => cell.row === rowIndex && cell.col === colIndex) ? "problem" : ""}
+              ${errorCells.some((cell) => cell.row === rowIndex && cell.col === colIndex) ? "error" : ""}
+              ${isBlockBorderRight ? "block-border-right" : ""}
+              ${isBlockBorderBottom ? "block-border-bottom" : ""}
+            `}
+            onClick={() => onCellClick(rowIndex, colIndex)}
+>
+
+          
               {cell !== 0 ? cell : ""}
             </div>
           );
